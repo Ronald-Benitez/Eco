@@ -1,5 +1,25 @@
 {
     "testing": {
         "test": "Texto de prueba"
-    }
+    },
+    "pages": {
+        "home": "Inicio",
+        "tools": "Herramientas",
+        "giveaway": "Sorteo",
+        "settings": "Ajustes"
+    },
+    "giveaway": {
+        "title": "Sorteo",
+        "participantAlreadyExists": "Ese participante ya existe",
+        "awardAlreadyExists": "Ese premio ya existe",
+        "awards": "Premios",
+        "participants": "Participantes",
+        "noParticipantsOrAwards": "No hay participantes o premios",
+        "moreParticipantsThanAwards": "Hay más participantes que premios",
+        "confirmClear": "¿Estás seguro de que quieres borrar todos los participantes y premios?",
+        "close": "Cerrar",
+        "winners": "Ganadores"
+    },
+    "confirm": "Confirmar",
+    "cancel": "Cancelar"
 }

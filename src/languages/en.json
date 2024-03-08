@@ -1,5 +1,25 @@
 {
     "testing":{
         "test": "Testing text"
-    }
+    },
+    "pages": {
+        "home": "Home",
+        "tools": "Tools",
+        "giveaway": "Giveaway",
+        "settings": "Settings"
+    },
+    "giveaway": {
+        "title": "Giveaway",
+        "participantAlreadyExists": "That participant already exists",
+        "awardAlreadyExists": "That award already exists",
+        "awards": "Awards",
+        "participants": "Participants",
+        "noParticipantsOrAwards": "No participants or awards",
+        "moreParticipantsThanAwards": "More participants than awards",
+        "confirmClear": "Are you sure you want to clear all participants and awards?",
+        "close": "Close",
+        "winners": "Winners"
+    },
+    "confirm": "Confirm",
+    "cancel": "Cancel"
 }
