@@ -9,7 +9,7 @@ import ModalBase from '@/src/components/ui/base-modal'
 import ManageData from '@/src/components/giveaways/manage-data'
 import DataBlock from '@/src/components/giveaways/data-block'
 import Confirm from '@/src/components/ui/confirm'
-import useToast from '@/src/components/ui/useToast'
+import useToast from '@/src/hooks/useToast'
 import Button from '@/src/components/ui/button'
 
 const Giveaway = () => {

@@ -1,0 +1,39 @@
+{
+    "colors":{
+        "primaryBackground":"#f5f5f5",
+        "primaryText":"#333333",
+        "secondaryBackground":"#eeeeee",
+        "secondaryText":"#666666",
+        "accentBackground":"#ffbfff",
+        "accentText":"#000",
+        "buttonBackground":"#ff4081",
+        "buttonText":"#ffffff",
+        "buttonBorder":"#ff4081",
+        "inputBorder":"#e0e0e0",
+        "inputBackground":"#ffffff",
+        "inputText":"#333333",
+        "inputPlaceholder":"#666666",
+        "toastBackground":"#fff",
+        "toastText":"#000"
+
+    },
+    "days":{
+        "unassigned": "#e0e0e0",
+        "neutral": "#ff4081",
+        "happy": "#ffd700",
+        "sad": "#6495ed",
+        "angry": "#ff4500",
+        "anxious": "#ff6347",
+        "tired": "#8a2be2",
+        "excited": "#ff8c00",
+        "relaxed": "#00ff7f",
+        "stressed": "#ff0000"
+    },
+    "headers":{
+        "home":"#ffa8da",
+        "days":"#ffa8da",
+        "giveaway":"#ffa8da",
+        "settings":"#ffa8da",
+        "financials":"#ffa8da"
+    }
+}

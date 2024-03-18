@@ -1,13 +1,13 @@
-import { View, Text, StyleSheet, ScrollView } from 'react-native'
-import React, { useCallback, useEffect, useState } from 'react'
-import useStyles from '@/src/hooks/useStyle'
+import { View, Text, ScrollView } from 'react-native'
+import React, { useEffect, useState } from 'react'
 import Animated, { useAnimatedStyle, useSharedValue, withDecay, withDelay, withSpring, withTiming } from 'react-native-reanimated'
 import { MaterialIcons } from '@expo/vector-icons';
 import * as Clipboard from "expo-clipboard";
 
+import useStyles from '@/src/hooks/useStyle'
 import Button from './button'
 import TapBlock from './color-picker/tap-block'
-import useToast from './useToast';
+import useToast from '../../hooks/useToast';
 
 const DefaultColors = [
     "#000000",
@@ -31,8 +31,10 @@ export interface ColorPickerProps {
 const ColorPicker: React.FC<ColorPickerProps> = ({ color, onColorChange, baseWith }) => {
     const { styles } = useStyles()
     const colorValue = useSharedValue(color)
+    const [colorText, setColorText] = useState<string>(color)
     const [baseColor, setBaseColor] = useState<string>(color)
-    let rgba = color.replace('#', '').match(/.{1,2}/g) || []
+    // let rgba = color.replace('#', '').match(/.{1,2}/g) || []
+    const [rgba, setRgba] = useState<string[]>(color.replace('#', '').match(/.{1,2}/g) || [])
     const { showToast, ToastContainer } = useToast()
 
     useEffect(() => {
@@ -61,8 +63,9 @@ const ColorPicker: React.FC<ColorPickerProps> = ({ color, onColorChange, baseWit
     const handleColorChange = (value: string) => {
         colorValue.value = withDelay(50, withTiming(value))
         onColorChange(value)
-        baseColor !== value && setBaseColor(value)
+        setBaseColor(value)
         calculateRGBA(value)
+        setColorText(value)
     }
 
     const animatedBlockStyle = useAnimatedStyle(() => {
@@ -90,28 +93,29 @@ const ColorPicker: React.FC<ColorPickerProps> = ({ color, onColorChange, baseWit
         const newColor = `#${rgba.join('')}`
         colorValue.value = newColor
         onColorChange(newColor)
+        setColorText(newColor)
     }
 
     const calculateRGBA = (value: string) => {
-        rgba = value.replace('#', '').match(/.{1,2}/g) || []
+        setRgba(value.replace('#', '').match(/.{1,2}/g) || [])
     }
 
     return (
         <>
-            <Animated.View style={[styles.container, { justifyContent: "center", alignItems: "center" }]}>
-                <View style={styles2.container}>
+            <Animated.View style={[{ justifyContent: "center", alignItems: "center" }]}>
+                <View style={styles.row}>
                     <Button onPress={handleCopy} >
                         <MaterialIcons name="content-copy" size={24} color="black" />
                     </Button>
-                    <Text style={styles2.textColor}>{color}</Text>
+                    <Text style={styles.textColor}>{colorText}</Text>
                     <Button onPress={handlePaste} >
                         <MaterialIcons name="content-paste" size={24} color="black" />
                     </Button>
                 </View>
-                <Animated.View style={[styles2.colorBlock, animatedBlockStyle]} />
-                <ScrollView horizontal style={[styles2.colorContainer]}>
+                <Animated.View style={[styles.colorBlock, animatedBlockStyle]} />
+                <ScrollView horizontal style={[styles.colorContainer]}>
                     {DefaultColors.map((color, index) => (
-                        <Button onPress={() => handleColorChange(color)} style={[{ backgroundColor: color }, styles2.colorView]} key={index}>
+                        <Button onPress={() => handleColorChange(color)} style={[{ backgroundColor: color }, styles.colorView]} key={index}>
                             <></>
                         </Button>
                     ))}
@@ -160,46 +164,5 @@ const ColorPicker: React.FC<ColorPickerProps> = ({ color, onColorChange, baseWit
         </>
     )
 }
-
-const styles2 = StyleSheet.create({
-    colorView: {
-        width: 48,
-        height: 48,
-        borderRadius: 5,
-        elevation: 5,
-        margin: 4,
-    },
-    colorContainer: {
-        maxWidth: 300,
-        maxHeight: 75,
-    },
-    colorBlock: {
-        width: 100,
-        height: 100,
-        borderRadius: 5,
-        margin: 4,
-        justifyContent: "center",
-        alignItems: "center",
-        borderColor: "#00000025",
-        borderWidth: 1,
-    },
-    textColor: {
-        fontWeight: "bold",
-        fontSize: 15,
-        borderColor: "black",
-        borderWidth: 1,
-        padding: 10,
-        borderRadius: 5,
-        height: 40,
-        textAlign: "center",
-        textAlignVertical: "center",
-    },
-    container: {
-        justifyContent: "center",
-        alignItems: "center",
-        flexDirection: "row",
-        gap: 20
-    },
-})
 
 export default ColorPicker

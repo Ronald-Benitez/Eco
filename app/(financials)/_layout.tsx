@@ -12,14 +12,14 @@ export default function Layout() {
     return (
         <StackBase>
             <Tabs.Screen
-                name="giveaway"
+                name="index"
                 options={{
-                    title: t('pages.giveaway'),
+                    title: t('pages.financials'),
                     tabBarIcon: ({ color, size }) => (
-                        <Ionicons name="gift-outline" size={size} color={color} />
+                        <Ionicons name="wallet-outline" size={size} color={color} />
                     ),
                     headerStyle: {
-                        backgroundColor: colors?.headers.giveaway || '#fff'
+                        backgroundColor: colors?.headers.financials || '#fff'
                     }
                 }} />
         </StackBase>

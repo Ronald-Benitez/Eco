@@ -1,18 +1,30 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { Drawer } from 'expo-router/drawer';
 import { Ionicons } from '@expo/vector-icons';
 import { useTranslation } from 'react-i18next';
+import data from '@/src/files/configs.json';
 
 import CustomDrawer from '@/src/components/navigation/custom-drawer';
 import "@/src/languages/i18n"
 import { StylesProvider } from '@/src/context/StylesContext';
 import useStyles from '@/src/hooks/useStyle';
 import Loading from '@/src/components/basics/loading';
+import { type Theme } from '@/src/interfaces/configs';
+import { readFile } from '@/src/helpers/FilesHelper';
 
 export default function Layout() {
     const { loading } = useStyles();
+    const [colors, setColors] = useState<Theme>(data as Theme)
     const { t } = useTranslation();
+
+    useEffect(() => {
+        const loadColors = async () => {
+            const res = await readFile('colors.json')
+            setColors(JSON.parse(res) as Theme)
+        }
+        loadColors()
+    }, []);
 
     return (
         <GestureHandlerRootView style={{ flex: 1 }}>
@@ -31,10 +43,30 @@ export default function Layout() {
                                     <Ionicons name="home-outline" size={size} color={color} />
                                 ),
                                 headerStyle: {
-                                    backgroundColor: 'white',
+                                    backgroundColor: colors?.headers.home || '#fff',
                                 },
                             }}
 
+                        />
+                        <Drawer.Screen
+                            name="(days)"
+                            options={{
+                                title: t('pages.days'),
+                                headerShown: false,
+                                drawerIcon: ({ color, size }) => (
+                                    <Ionicons name="calendar-clear-outline" size={size} color={color} />
+                                )
+                            }}
+                        />
+                        <Drawer.Screen
+                            name="(financials)"
+                            options={{
+                                title: t('pages.financials'),
+                                headerShown: false,
+                                drawerIcon: ({ color, size }) => (
+                                    <Ionicons name="wallet-outline" size={size} color={color} />
+                                )
+                            }}
                         />
                         <Drawer.Screen
                             name="(tools)"
@@ -52,8 +84,12 @@ export default function Layout() {
                                 title: t('pages.settings'),
                                 drawerIcon: ({ color, size }) => (
                                     <Ionicons name="settings-outline" size={size} color={color} />
-                                )
+                                ),
+                                headerStyle: {
+                                    backgroundColor: colors?.headers.settings || '#fff',
+                                },
                             }}
+
                         />
                         <Drawer.Screen
                             name="+not-found"

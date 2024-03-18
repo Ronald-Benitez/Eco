@@ -3,7 +3,8 @@ import React, { useEffect } from 'react'
 import Animated, { runOnJS, runOnUI, useAnimatedStyle, useSharedValue, withDelay, withSpring, withTiming } from 'react-native-reanimated';
 import { Gesture, GestureDetector } from 'react-native-gesture-handler';
 import { LinearGradient } from 'expo-linear-gradient';
-import { MaterialIcons } from '@expo/vector-icons';
+
+import useStyles from '@/src/hooks/useStyle';
 
 export interface TapBlockProps {
     baseColor: string;
@@ -19,10 +20,7 @@ export interface TapBlockProps {
 const TapBlock: React.FC<TapBlockProps> = ({ baseColor, disposition, baseHeigth, baseWith, onChange, baseHex, icon }) => {
     const horizontal = disposition === "horizontal"
     const selectWith = useSharedValue(horizontal ? baseWith : baseHeigth)
-
-    useEffect(() => {
-        selectWith.value = withTiming((horizontal ? baseWith : baseHeigth) - 35)
-    }, [baseColor])
+    const { styles } = useStyles()
 
     useEffect(() => {
         const normalized = parseInt(baseHex, 16) / 255
@@ -88,39 +86,5 @@ const TapBlock: React.FC<TapBlockProps> = ({ baseColor, disposition, baseHeigth,
     )
 }
 
-const styles = StyleSheet.create({
-    brigthnessBlock: {
-        borderRadius: 5,
-        elevation: 5,
-        margin: 4,
-        justifyContent: "center",
-        alignItems: "center",
-    },
-    brightnessSelector: {
-        position: "absolute",
-        width: 35,
-        height: 35,
-        borderRadius: 100,
-        elevation: 15,
-        borderColor: "white",
-        borderWidth: 3,
-        backgroundColor: "transparent",
-    },
-    row: {
-        flexDirection: "row",
-        justifyContent: "space-between",
-        alignItems: "center",
-    },
-
-    underBlock: {
-        width: 48,
-        height: 48,
-        elevation: 10,
-        backgroundColor: "white",
-        alignItems: "center",
-        justifyContent: "center",
-        borderRadius: 5,
-    },
-})
 
 export default TapBlock

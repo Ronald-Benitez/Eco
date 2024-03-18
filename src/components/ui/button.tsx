@@ -6,7 +6,7 @@ import { Gesture, GestureDetector } from 'react-native-gesture-handler';
 import { View } from '@/components/Themed';
 
 export interface ButtonProps {
-    children: React.ReactNode;
+    children?: React.ReactNode;
     onPress: () => void;
     style?: any;
 }
@@ -32,7 +32,7 @@ const Button: React.FC<ButtonProps> = ({ children, onPress, style }) => {
         <GestureDetector gesture={tab}>
             <Animated.View style={[animatedStyle]}>
                 <View style={style ? style : styles.button}>
-                    {children}
+                    {children && children}
                 </View>
             </Animated.View>
         </GestureDetector>

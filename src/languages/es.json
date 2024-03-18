@@ -6,7 +6,9 @@
         "home": "Inicio",
         "tools": "Herramientas",
         "giveaway": "Sorteo",
-        "settings": "Ajustes"
+        "settings": "Ajustes",
+        "days": "Días",
+        "financials": "Finanzas"
     },
     "giveaway": {
         "title": "Sorteo",
@@ -20,6 +22,93 @@
         "close": "Cerrar",
         "winners": "Ganadores"
     },
+    "days":{
+        "moods": "Estados de ánimo",
+        "expected": "Esperado",
+        "real": "Real"
+    },
     "confirm": "Confirmar",
-    "cancel": "Cancelar"
+    "cancel": "Cancelar",
+    "colors":{
+        "colors": "Colores",
+        "days": "Días",
+        "headers":"Encabezados",
+        "giveaway": "Sorteo",
+        "settings": "Ajustes",
+        "home": "Inicio",
+        "financials": "Finanzas",
+
+        "change": "Cambiar",
+        "changeColorOf": "Cambiar color de",
+        "reset":"Restablecer",
+        "resetMessage": "¿Estás seguro de que quieres restablecer los colores a sus valores por defecto?",
+
+        "primaryBackground": "Fondo principal",
+        "primaryText": "Texto principal",
+        "secondaryBackground": "Fondo secundario",
+        "secondaryText": "Texto secundario",
+        "accentBackground": "Fondo de acento",
+        "accentText": "Texto de acento",
+        "buttonBackground": "Fondo del botón",
+        "buttonText": "Texto del botón",
+        "buttonBorder": "Borde del botón",
+        "inputBorder": "Borde del input",
+        "inputBackground": "Fondo del input",
+        "inputText": "Texto del input",
+        "inputPlaceholder": "Placeholder del input",
+        "toastBackground": "Fondo del toast",
+        "toastText": "Texto del toast",
+
+        "unassigned": "Sin asignar",
+        "neutral": "Neutro",
+        "happy": "Feliz",
+        "sad": "Triste",
+        "angry": "Enfadado",
+        "anxious": "Ansioso",
+        "tired": "Cansado",
+        "sick": "Enfermo",
+        "excited": "Emocionado",
+        "relaxed": "Relajado",
+        "stressed": "Estresado"
+    },
+    "language":{
+        "en": "English",
+        "es": "Español",
+        "system": "Sistema",
+        "selectLanguage": "Selecciona un idioma",
+        "language": "Idioma",
+        "changeLanguage": "Cambiar idioma"
+    },
+    "months":{
+        "0": "Enero",
+        "1": "Febrero",
+        "2": "Marzo",
+        "3": "Abril",
+        "4": "Mayo",
+        "5": "Junio",
+        "6": "Julio",
+        "7": "Agosto",
+        "8": "Septiembre",
+        "9": "Octubre",
+        "10": "Noviembre",
+        "11": "Diciembre"
+    },
+    "daysShort":{
+        "0": "Dom",
+        "1": "Lun",
+        "2": "Mar",
+        "3": "Mié",
+        "4": "Jue",
+        "5": "Vie",
+        "6": "Sáb"
+    },
+    "daysLong":{
+        "0": "Domingo",
+        "1": "Lunes",
+        "2": "Martes",
+        "3": "Miércoles",
+        "4": "Jueves",
+        "5": "Viernes",
+        "6": "Sábado"
+    }
 }

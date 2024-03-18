@@ -5,12 +5,13 @@ import useStyles from '@/src/hooks/useStyle'
 import Loading from '@/src/components/basics/loading'
 
 const index = () => {
-    const { styles, loading, getStyles, setStyles } = useStyles()
+    const { styles, loading, getStyles, setStyles, reloadColors } = useStyles()
 
     useEffect(() => {
         getStyles().then((res: any) => {
             setStyles(res)
         })
+        reloadColors()
     }, [])
 
     if (loading) {

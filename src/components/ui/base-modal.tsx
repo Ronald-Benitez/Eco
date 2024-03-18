@@ -4,9 +4,10 @@ import useStyles from '@/src/hooks/useStyle';
 
 export interface BaseModalProps {
     children: React.ReactNode;
-    title: string;
+    title?: string;
     button?: React.ReactNode;
     hideOnBackdropPress?: boolean;
+    maxHeight?: number;
 }
 
 const BaseModal = (hideOnBackdropPress: BaseModalProps["hideOnBackdropPress"]) => {
@@ -20,7 +21,7 @@ const BaseModal = (hideOnBackdropPress: BaseModalProps["hideOnBackdropPress"]) =
         if (hideOnBackdropPress) hideModal();
     }
 
-    const CustomModal = ({ children, title, button }: BaseModalProps) => (
+    const CustomModal = ({ children, title, button, maxHeight }: BaseModalProps) => (
         <>
             {
                 button && (
@@ -36,8 +37,8 @@ const BaseModal = (hideOnBackdropPress: BaseModalProps["hideOnBackdropPress"]) =
                 animationType="slide"
             >
                 <Pressable onPress={backdropPress} style={styles?.modalBackdrop}>
-                    <Pressable onPress={() => { }} style={styles?.modalContent}>
-                        <Text style={styles.title}>{title}</Text>
+                    <Pressable onPress={() => { }} style={[styles?.modalContent, { maxHeight: maxHeight }]}>
+                        <Text style={styles?.title}>{title && title}</Text>
                         {children}
                     </Pressable>
                 </Pressable>

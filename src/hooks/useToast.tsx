@@ -32,8 +32,6 @@ const useToast = () => {
         }, 3000)
     }
 
-
-
     const ToastContainer = () => {
         return (
             <Modal

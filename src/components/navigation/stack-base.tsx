@@ -31,13 +31,14 @@ const StackBase = ({ children }: StackBaseProps) => {
                     />
                 ),
                 tabBarStyle: {
-                    backgroundColor: 'black',
-                    
+                    backgroundColor: '#e0e0e0',
+
                 },
-                tabBarActiveTintColor: 'white',
-                
+                tabBarActiveTintColor: 'black',
+                tabBarShowLabel: false,
+
             }}
-            
+
         >
             {children}
         </Tabs>
