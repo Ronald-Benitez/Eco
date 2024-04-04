@@ -8,7 +8,9 @@
         "giveaway": "Sorteo",
         "settings": "Ajustes",
         "days": "Días",
-        "financials": "Finanzas"
+        "financials": "Finanzas",
+        "chart": "Gráfico",
+        "expense-adder": "Sumador de gastos"
     },
     "giveaway": {
         "title": "Sorteo",
@@ -29,6 +31,14 @@
     },
     "confirm": "Confirmar",
     "cancel": "Cancelar",
+    "confirmDelete": "¿Estás seguro de que quieres eliminar esto?",
+    "delete": "Eliminar",
+    "year-error": "Año no válido",
+
+    "pickers":{
+        "month": "Selecciona un mes"
+    },
+
     "colors":{
         "colors": "Colores",
         "days": "Días",
@@ -37,6 +47,8 @@
         "settings": "Ajustes",
         "home": "Inicio",
         "financials": "Finanzas",
+        "chart": "Gráfico",
+        "expense-adder": "Sumador de gastos",
 
         "change": "Cambiar",
         "changeColorOf": "Cambiar color de",
@@ -58,6 +70,8 @@
         "inputPlaceholder": "Placeholder del input",
         "toastBackground": "Fondo del toast",
         "toastText": "Texto del toast",
+        "delete": "Eliminar",
+        "edit": "Editar",
 
         "unassigned": "Sin asignar",
         "neutral": "Neutro",
@@ -69,7 +83,11 @@
         "sick": "Enfermo",
         "excited": "Emocionado",
         "relaxed": "Relajado",
-        "stressed": "Estresado"
+        "stressed": "Estresado",
+
+        "income": "Ingresos",
+        "expense": "Gastos",
+        "goal": "Objetivo"
     },
     "language":{
         "en": "English",
@@ -110,5 +128,32 @@
         "4": "Jueves",
         "5": "Viernes",
         "6": "Sábado"
+    },
+    "datePicker":{
+        "today": "Hoy",
+        "cancel": "Cancelar"
+    },
+    "expense-adder":{
+        "edit": "Editar gasto",
+        "add": "Añadir gasto",
+        "name": "Nombre",
+        "value": "Valor",
+        "quantity": "Cantidad",
+        "total": "Total",
+        "cancel": "Cancelar"
+    },
+    "group": {
+        "name": "Nombre",
+        "expenses": "Gastos",
+        "incomes": "Ingresos",
+        "goal": "Objetivo",
+        "year": "Año",
+        "month": "Mes",
+        "cancel": "Cancelar",
+        "save": "Guardar",
+        "add": "Crear grupo",
+        "edit": "Editar grupo",
+        "error": "Debes rellenar todos los campos",
+        "select-group": "Selecciona un grupo"
     }
 }

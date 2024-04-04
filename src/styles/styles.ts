@@ -11,6 +11,7 @@ export interface StylesProps {
   text: StyleProp<TextStyle>;
   textColor: StyleProp<TextStyle>;
   enfasizedText: StyleProp<TextStyle>;
+  textCenter: StyleProp<TextStyle>;
 
   bgPrimary: StyleProp<ViewStyle>;
   container: StyleProp<ViewStyle>;
@@ -27,10 +28,13 @@ export interface StylesProps {
   input: StyleProp<ViewStyle>;
   button: StyleProp<ViewStyle>;
   enfasizedButton: StyleProp<ViewStyle>;
+  backgroundButton: StyleProp<ViewStyle>;
+  disabledButton: StyleProp<ViewStyle>;
   divider: StyleProp<ViewStyle>;
   horizontalBlock: StyleProp<ViewStyle>;
   fixedBottom: StyleProp<ViewStyle>;
   fixedBackground: StyleProp<ViewStyle>;
+  fixedTop: StyleProp<ViewStyle>;
   colorView: StyleProp<ViewStyle>;
   colorContainer: StyleProp<ViewStyle>;
   colorBlock: StyleProp<ViewStyle>;
@@ -41,7 +45,8 @@ export interface StylesProps {
   brigthnessBlock: StyleProp<ViewStyle>;
   brightnessSelector: StyleProp<ViewStyle>;
   underBlock: StyleProp<ViewStyle>;
-  moodView: StyleProp<ViewStyle>;
+  moodViewHorizontal: StyleProp<ViewStyle>;
+  moodViewVertical: StyleProp<ViewStyle>;
 }
 
 export const getStyles = async () => {
@@ -110,6 +115,9 @@ export const getStyles = async () => {
       fontWeight: "400",
       color: colors.colors.accentText || "black",
       marginHorizontal: 10,
+    },
+    textCenter: {
+      textAlign: "center",
     },
 
     bgPrimary: {
@@ -189,6 +197,7 @@ export const getStyles = async () => {
       minWidth: 200,
       minHeight: 48,
       padding: 6,
+      paddingHorizontal: 12,
       backgroundColor: colors.colors.inputBackground || "white",
       borderRadius: 4,
       borderWidth: 1,
@@ -202,6 +211,18 @@ export const getStyles = async () => {
     enfasizedButton: {
       ...baseButton,
       backgroundColor: colors.colors.accentBackground || "white",
+    },
+    backgroundButton: {
+      flex: 1,
+      padding: 8,
+      justifyContent: "center",
+      alignItems: "center",
+      backgroundColor: colors.colors.primaryBackground || "white",
+      
+    },
+    disabledButton: {
+      ...baseButton,
+      backgroundColor: colors.colors.disabled || "gray",
     },
     divider: {
       width: "100%",
@@ -234,6 +255,15 @@ export const getStyles = async () => {
       zIndex: -1,
       backgroundColor: "transparent",
     },
+    fixedTop: {
+      position: "absolute",
+      width: "100%",
+      top: 0,
+      padding: 10,
+      justifyContent: "space-around",
+      flexDirection: "row",
+      backgroundColor: colors.colors.primaryBackground || "white",
+    },
     colorView: {
       width: 48,
       height: 48,
@@ -263,6 +293,7 @@ export const getStyles = async () => {
       alignItems: "center",
       padding: 0,
       top: 0,
+      backgroundColor: "rgba(0, 0, 0, 0.5)",
     },
     centerer: {
       flex: 1,
@@ -310,10 +341,16 @@ export const getStyles = async () => {
       justifyContent: "center",
       borderRadius: 5,
     },
-    moodView: {
+    moodViewHorizontal: {
       width: "100%",
       height: 10,
       borderRadius: 5,
+    },
+    moodViewVertical: {
+      width: 5,
+      height: "100%",
+      position: "absolute",
+      left: 0,
     },
   });
 };

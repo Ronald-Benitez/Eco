@@ -58,6 +58,31 @@ const ColorConfigs: React.FC<ColorConfigsProps> = ({ handleLoad, colors, showMod
         }
     }
 
+    const Block = ({ val }: { val: keyof Theme }) => {
+        const render: JSX.Element[] = []
+        try {
+            Object.keys(colors[val]).map((subKey, subIndex) => {
+                const dynamicKey = subKey as keyof Theme[ThemeKeys];
+                const color = colors[val][dynamicKey]
+                render.push(
+                    <ColorBlock
+                        color={color}
+                        title={subKey}
+                        onClick={() => {
+                            setColorToChange({ key: val, subKey, color })
+                            showModal()
+                        }}
+                        key={subIndex}
+                    />
+                )
+
+            })
+        } catch (error) {
+            console.log(error)
+        }
+        return <>{render}</>
+    }
+
     return (
         <>
             <View style={[styles.col, { marginBottom: 40 }]}>
@@ -68,25 +93,12 @@ const ColorConfigs: React.FC<ColorConfigsProps> = ({ handleLoad, colors, showMod
                     </Button>
                 </Confirm>
                 {keys.map((key: keyof Theme, index) => {
+                    console.log(key, colors[key])
                     return (
                         <Dropdown key={index} title={t(`colors.${key}`)}>
                             <View style={styles.col}>
                                 {
-                                    Object.keys(colors[key]).map((subKey, subIndex) => {
-                                        const dynamicKey = subKey as keyof Theme[ThemeKeys];
-                                        const color = colors[key][dynamicKey]
-                                        return (
-                                            <ColorBlock
-                                                color={color}
-                                                title={subKey}
-                                                onClick={() => {
-                                                    setColorToChange({ key, subKey, color })
-                                                    showModal()
-                                                }}
-                                                key={subIndex}
-                                            />
-                                        )
-                                    })
+                                    <Block key={key} val={key} />
                                 }
                                 <Confirm title={`${t("colors.reset")} ${t("colors." + key)}`} message={t("colors.resetMessage")} onConfirm={() => handleReset(key)} >
                                     <Button style={styles.enfasizedButton} onPress={() => { }} >

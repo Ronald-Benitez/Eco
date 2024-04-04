@@ -1,87 +1,111 @@
 import { View, Text, ScrollView } from 'react-native'
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 
 import TextBlock from '@/src/components/days/text-block'
 import useStyles from '@/src/hooks/useStyle'
 import MoodDisplay from '@/src/components/days/mood-display'
-import DatePicker from '@/src/components/ui/date-picker'
 import MoodPicker from '@/src/components/days/mood-picker'
 import useDate from '@/src/hooks/useDate'
+import Button from '@/src/components/ui/button'
+import useDb from '@/src/hooks/useDb'
+import DatePicker from '@/src/components/ui/date-picker'
 
-type day = {
-    date: string
-    expected: string
-    real: string
-    difference: string
-}
-
-const moods = [
-    "unassigned",
-    "neutral",
-    "happy",
-    "sad",
-    "angry",
-    "anxious",
-    "tired",
-    "excited",
-    "relaxed",
-    "stressed",
-]
 const Index = () => {
     const { styles } = useStyles()
-    const [day, setDay] = useState<day>({
-        date: new Date().toISOString(),
-        expected: "",
-        real: "",
-        difference: ""
-    })
+    const dateHelper = useDate()
+    const [date, setDate] = useState(dateHelper.create())
+    const [difference, setDifference] = useState<string>("")
+    const [expected, setExpected] = useState<string>("")
+    const [real, setReal] = useState<string>("")
     const { t } = useTranslation()
-    const date = useDate()
+    const { useDays } = useDb()
 
-    const handleAddMood = (value: string, index: number) => {
-        let { difference } = day
+    const onMoodChange = (index: number) => {
+        let diff = difference
         const moods = difference.split(" ")
         if (moods.find((mood) => mood === index.toString())) {
-            difference = difference.replace(`${index} `, "")
-            return setDay({ ...day, difference })
+            diff = difference.replace(`${index} `, "")
+            return setDifference(diff)
         }
-        difference += `${index} `
-        setDay({ ...day, difference })
+        diff += `${index} `
+        setDifference(diff)
+        useDays.updateField(date, diff, 'difference')
     }
 
+    const onExpectedChange = (text: string) => {
+        setExpected(text)
+        useDays.updateField(date, text, 'expected')
+    }
+
+    const onRealChange = (text: string) => {
+        setReal(text)
+        useDays.updateField(date, text, 'real')
+    }
+
+    useEffect(() => {
+        loadDay()
+        // useDays.clean()
+    }, [date])
+
+
+    const loadDay = async () => {
+        const res = await useDays.getDay(date)
+        console.log(res)
+        if (res) {
+            setExpected(res.expected)
+            setReal(res.real)
+            setDifference(res.difference)
+
+        } else {
+            setExpected("")
+            setReal("")
+            setDifference("")
+            useDays.insertDay({
+                date,
+                expected: "",
+                real: "",
+                difference: ""
+            })
+        }
+    }
+
+
     return (
-        <ScrollView style={styles.bgPrimary}>
-            <View style={styles.container}>
-                <MoodDisplay
-                    moods={moods}
-                    mood={day.difference}
-                />
-                <View style={styles.row}>
-                    <DatePicker
-                        value={day.date}
-                        onChange={(date) => setDay({ ...day, date })}
-                        buttonText={date.getDay(day.date)}
+        <View style={styles.container}>
+            <ScrollView style={styles.bgPrimary}>
+                <View style={styles.container}>
+                    <MoodDisplay
+                        mood={difference}
                     />
-                    <MoodPicker
-                        value={day.difference}
-                        moods={moods}
-                        onChange={handleAddMood}
+                    <View style={styles.row}>
+                        <Button onPress={() => setDate(dateHelper.create())}>
+                            <Text style={styles.text}>{dateHelper.getStringDay(date)}</Text>
+                        </Button>
+                        <MoodPicker
+                            value={difference}
+                            onChange={onMoodChange}
+                        />
+                    </View>
+                    <TextBlock
+                        title={t("days.expected")}
+                        text={expected}
+                        onChangeText={onExpectedChange}
+                    />
+                    <TextBlock
+                        title={t("days.real")}
+                        text={real}
+                        onChangeText={onRealChange}
                     />
                 </View>
-                <TextBlock
-                    title={t("days.expected")}
-                    text={day.expected}
-                    onChangeText={(text) => setDay({ ...day, expected: text })}
-                />
-                <TextBlock
-                    title={t("days.real")}
-                    text={day.real}
-                    onChangeText={(text) => setDay({ ...day, real: text })}
-                />
-            <Text style={styles.middleText}>{date.getDate(day.date)}</Text>
-            </View>
-        </ScrollView>
+            </ScrollView>
+            <DatePicker
+                value={date}
+                onChange={setDate}
+                extras={true}
+                buttonText={dateHelper.getStringDate(date)}
+            />
+        </View>
     )
 }
 

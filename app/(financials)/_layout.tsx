@@ -22,6 +22,17 @@ export default function Layout() {
                         backgroundColor: colors?.headers.financials || '#fff'
                     }
                 }} />
+            <Tabs.Screen
+                name="expense-adder"
+                options={{
+                    title: t('pages.expense-adder'),
+                    tabBarIcon: ({ color, size }) => (
+                        <Ionicons name="trending-down" size={size} color={color} />
+                    ),
+                    headerStyle: {
+                        backgroundColor: colors?.headers.financials || '#fff'
+                    }
+                }} />
         </StackBase>
     );
 }

@@ -4,14 +4,15 @@ import { useTranslation } from 'react-i18next'
 import { LinearGradient } from 'expo-linear-gradient'
 
 import useStyles from '@/src/hooks/useStyle'
+import moods from "@/src/files/moods.json"
 
 interface MoodDisplayProps {
-    moods: string[]
     mood: string
     horizontal?: boolean
 }
 
-const MoodDisplay: React.FC<MoodDisplayProps> = ({ mood, moods, horizontal = true }) => {
+
+const MoodDisplay: React.FC<MoodDisplayProps> = ({ mood, horizontal = true }) => {
     const { styles, colors } = useStyles()
     const { t } = useTranslation()
     const [moodsSelected, setMoodsSelected] = React.useState<string[]>([])
@@ -36,11 +37,11 @@ const MoodDisplay: React.FC<MoodDisplayProps> = ({ mood, moods, horizontal = tru
         return gradient
     }
 
-    const start = horizontal ? { x: 0, y: 0 } : { x: 0, y: 1 }
+    const start = horizontal ? { x: 0, y: 0 } : { x: 0, y: 0 }
     const end = horizontal ? { x: 1, y: 0 } : { x: 0, y: 1 }
 
     return (
-        <LinearGradient colors={getGradient()} style={styles.moodView} start={start} end={end} />
+        <LinearGradient colors={getGradient()} style={horizontal ? styles.moodViewHorizontal : styles.moodViewVertical} start={start} end={end} />
     )
 }
 

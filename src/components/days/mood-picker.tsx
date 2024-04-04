@@ -6,14 +6,15 @@ import { useTranslation } from 'react-i18next'
 import useStyles from '@/src/hooks/useStyle'
 import BaseModal from '@/src/components/ui/base-modal'
 import Button from '@/src/components/ui/button'
+import moods from "@/src/files/moods.json"
 
 interface PickerProps {
     value: string
-    moods: string[]
-    onChange: (value: string, index: number) => void
+    onChange: (index: number) => void
 }
 
-const MoodPicker: React.FC<PickerProps> = ({ onChange, moods, value }) => {
+
+const MoodPicker: React.FC<PickerProps> = ({ onChange, value }) => {
     const { colors, styles } = useStyles()
     const { CustomModal, showModal, hideModal } = BaseModal(true)
     const [selectedMoods, setSelectedMoods] = useState<string[]>([])
@@ -37,8 +38,8 @@ const MoodPicker: React.FC<PickerProps> = ({ onChange, moods, value }) => {
         </Button>
     )
 
-    const handlePress = (option: string, index: number) => {
-        onChange(option, index)
+    const handlePress = (index: number) => {
+        onChange(index)
         hideModal()
     }
 
@@ -68,7 +69,7 @@ const MoodPicker: React.FC<PickerProps> = ({ onChange, moods, value }) => {
                     <View style={[styles.col, { gap: 4, minWidth: "80%", minHeight: "100%" }]}>
                         {
                             mappedMoods.map((option, index) => (
-                                <TouchableOpacity key={index} style={[styles.button, getStyle(index)]} onPress={() => handlePress(option, index)}>
+                                <TouchableOpacity key={index} style={[styles.button, getStyle(index)]} onPress={() => handlePress(index)}>
                                     <Text style={styles.middleText}>{option}</Text>
                                     {
                                         isSelected(index) && <Ionicons name="checkmark" size={24} color={getColor(index)} />

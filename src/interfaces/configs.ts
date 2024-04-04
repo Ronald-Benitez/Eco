@@ -14,6 +14,9 @@ export interface ColorScheme {
   inputPlaceholder: string;
   toastBackground: string;
   toastText: string;
+  delete: string;
+  edit: string;
+  disabled: string;
 }
 
 export interface DayColors {
@@ -37,8 +40,15 @@ export interface HeaderColors {
   financials: string;
 }
 
+export interface Finances {
+  income: string;
+  expense: string;
+  goal: string;
+}
+
 export interface Theme {
   colors: ColorScheme;
   days: DayColors;
   headers: HeaderColors;
+  financials: Finances;
 }

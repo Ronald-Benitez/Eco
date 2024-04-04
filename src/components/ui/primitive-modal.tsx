@@ -31,14 +31,12 @@ const PrimitiveModal = (hideOnBackdropPress: BaseModalProps["hideOnBackdropPress
             }
             {
                 modalVisible && (
-                    <View style={styles.primitiveModalContainer}>
-                        <Pressable onPress={backdropPress} style={styles?.modalBackdrop}>
-                            <Pressable onPress={() => { }} style={styles?.modalContent}>
-                                <Text style={styles.title}>{title && title}</Text>
-                                {children}
-                            </Pressable>
+                    <Pressable onPress={backdropPress} style={styles.primitiveModalContainer}>
+                        <Pressable onPress={() => { }} style={[styles?.modalContent, { width: "100%" }]}>
+                            <Text style={styles.title}>{title && title}</Text>
+                            {children}
                         </Pressable>
-                    </View>
+                    </Pressable>
                 )}
         </>
     );

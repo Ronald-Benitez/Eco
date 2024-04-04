@@ -113,13 +113,13 @@ const ColorPicker: React.FC<ColorPickerProps> = ({ color, onColorChange, baseWit
                     </Button>
                 </View>
                 <Animated.View style={[styles.colorBlock, animatedBlockStyle]} />
-                <ScrollView horizontal style={[styles.colorContainer]}>
+                <View style={[{ flexDirection: "row", flexWrap: "wrap", justifyContent: "center" }]}>
                     {DefaultColors.map((color, index) => (
                         <Button onPress={() => handleColorChange(color)} style={[{ backgroundColor: color }, styles.colorView]} key={index}>
                             <></>
                         </Button>
                     ))}
-                </ScrollView>
+                </View>
 
                 <TapBlock
                     baseColor={baseColor}

@@ -6,57 +6,75 @@ import { Ionicons } from '@expo/vector-icons'
 import BaseModal from './base-modal'
 import useStyles from '@/src/hooks/useStyle'
 import Button from './button'
+import useDb from '@/src/hooks/useDb'
+import MoodDisplay from '../days/mood-display'
+import { Day } from '@/src/interfaces/day'
+import useDate from '@/src/hooks/useDate'
 
 interface DatePickerProps {
     value: string
-    onChange: (value: string) => void
+    onChange: React.Dispatch<React.SetStateAction<string>>
     buttonText: string
+    extras?: boolean
 }
 
-const DatePicker: React.FC<DatePickerProps> = ({ onChange, value, buttonText }) => {
+const DatePicker: React.FC<DatePickerProps> = ({ value, buttonText, extras, onChange }) => {
     const { styles, colors } = useStyles()
     const { t } = useTranslation()
-    const { CustomModal, hideModal, showModal } = BaseModal(true)
+    const { CustomModal, hideModal } = BaseModal(true)
     const [year, setYear] = useState<number>(0)
-    const [yearText, setYearText] = useState<string>("")
     const [month, setMonth] = useState<number>(0)
     const [day, setDay] = useState<number>(0)
     const [monthsRendered, setMonthsRendered] = useState<boolean>(false)
     const [yearsRendered, setYearsRendered] = useState<boolean>(false)
+    const { useDays } = useDb()
+    const [days, setDays] = useState<Day[]>([])
+    const dateH = useDate()
+    const [date, setDate] = useState(value)
 
     useEffect(() => {
-        const date = new Date(value)
-        setYear(date.getFullYear())
-        setMonth(date.getMonth())
-        setDay(date.getDate())
+        onChange(date)
+    }, [date])
+
+    useEffect(() => {
+        const split = value.split("/")
+        setYear(Number(split[0]))
+        setMonth(Number(split[1]) - 1)
+        setDay(Number(split[2]))
+        if (extras === undefined || extras === false) return
+        const loadDays = async () => {
+            const days = await useDays.getMonth(value)
+            setDays(days)
+        }
+        loadDays()
     }, [])
 
-    const reset = () => {
-        const date = new Date()
-        setYear(date.getFullYear())
-        setMonth(date.getMonth())
-        setDay(date.getDate())
-        onChange(date.toISOString())
-    }
-
-
-    const handleDayChange = (value: number) => {
-        setDay(value)
-        const date = new Date(year, month, value)
-        onChange(date.toISOString())
-        hideModal()
-    }
-
     const handleChangeMonth = (value: number) => {
-        const date = new Date(year, month + value, day)
-        setMonth(date.getMonth())
-        onChange(date.toISOString())
+        setDate(dateH.changeMonth(value, date))
+        setMonth(value)
+        setMonthsRendered(false)
+        setYearsRendered(false)
     }
 
     const handleChangeYear = (value: number) => {
-        const date = new Date(value, month, day)
-        setYear(date.getFullYear())
-        onChange(date.toISOString())
+        setDate(dateH.changeYear(value, date))
+        setYear(value)
+        setMonthsRendered(false)
+        setYearsRendered(false)
+    }
+
+    const handleDayChange = (value: number) => {
+        const val = dateH.changeDay(value, date)
+        setDay(value)
+        setMonthsRendered(false)
+        setYearsRendered(false)
+        const m = dateH.getMonth(val)
+        const y = dateH.getYear(val)
+        if (m !== month || y !== year) {
+            setMonth(m)
+            setYear(y)
+        }
+        setDate(val)
     }
 
     const RenderMonths = () => {
@@ -65,7 +83,7 @@ const DatePicker: React.FC<DatePickerProps> = ({ onChange, value, buttonText }) 
             months.push(
                 <TouchableOpacity
                     key={i}
-                    onPress={() => handleChangeMonth(i - month)}
+                    onPress={() => handleChangeMonth(i)}
                     style={[styles.button, i === month && { backgroundColor: colors.colors.accentBackground }, { minWidth: "40%" }]}
                 >
                     <Text style={[styles.middleText, i === month && { color: colors.colors.accentText }]}>{t('months.' + String(i))}</Text>
@@ -93,9 +111,8 @@ const DatePicker: React.FC<DatePickerProps> = ({ onChange, value, buttonText }) 
 
     const RenderDays = () => {
         const days = []
-        const firstDay = new Date(year, month, 1).getDay()
-        const lastDay = new Date(year, month + 1, 0).getDate()
-
+        const firstDay = dateH.firtsDayOfMonth(date)
+        const lastDay = dateH.lastDayOfMonth(date)
         for (let i = 0; i < firstDay; i++) {
             days.push(
                 <View key={i + "void"} style={styles2.dayCellVoid} />
@@ -109,12 +126,26 @@ const DatePicker: React.FC<DatePickerProps> = ({ onChange, value, buttonText }) 
                     onPress={() => handleDayChange(i)}
                     style={[styles2.dayCell, i === day && { backgroundColor: colors.colors.accentBackground }]}
                 >
+                    <RenderMoodDisplay day={i} />
                     <Text style={[styles.middleText, i === day && { color: colors.colors.accentText }]}>{i}</Text>
                 </TouchableOpacity >
             )
         }
 
         return days
+    }
+
+    const RenderMoodDisplay = ({ day }: { day: number }) => {
+        if (!extras) return
+        if (days.length === 0) return
+        const d = dateH.create(`${year}-${month + 1}-${day + 1}`)
+        const dayData = days.find((v) => v.date === d)
+        console.log(dayData?.date, d)
+        if (dayData && dayData.difference != "") {
+            return (
+                <MoodDisplay mood={dayData.difference} horizontal={false} />
+            )
+        }
     }
 
     const RenderDaysHeader = () => {
@@ -178,34 +209,73 @@ const DatePicker: React.FC<DatePickerProps> = ({ onChange, value, buttonText }) 
         }
     }
 
+    const onTodayPress = () => {
+        const newDate = dateH.create()
+        setDate(newDate)
+        setYear(dateH.getYear(newDate))
+        setMonth(dateH.getMonth(newDate))
+        setDay(dateH.getDay(newDate))
+
+    }
+
+    const handleArrowPress = (value: number) => {
+        const newDay = day + value
+        handleDayChange(newDay)
+    }
+
+
+
     return (
-        <CustomModal
-            button={<Button onPress={() => { }}><Text style={styles.text}>{buttonText}</Text></Button>}
-        >
-            <View style={[styles.row, { justifyContent: "space-between" }]}>
-                <TouchableOpacity onPress={() => handleChangeMonth(-1)} style={styles.button}>
-                    <Ionicons name="caret-back" size={24} color={colors.colors.primaryText} />
-                </TouchableOpacity>
-                <TouchableOpacity onPress={() => handleSetRender(RenderOptions.months, !monthsRendered)} style={styles.button}>
-                    <Text style={styles.text}>
-                        {t('months.' + String(month))}
-                    </Text>
-                </TouchableOpacity>
-                <TouchableOpacity onPress={() => handleSetRender(RenderOptions.years, !yearsRendered)} style={styles.button}>
-                    <Text style={styles.text}>
-                        {" " + year}
-                    </Text>
-                </TouchableOpacity>
-                <TouchableOpacity onPress={() => handleChangeMonth(1)} style={styles.button}>
-                    <Ionicons name="caret-forward" size={24} color={colors.colors.primaryText} />
-                </TouchableOpacity>
-            </View>
-            <ConditionalRendering />
-            <View style={styles.row}>
-                <TouchableOpacity onPress={hideModal} style={styles.button}><Text style={styles.text}>Cancel</Text></TouchableOpacity>
-                <TouchableOpacity onPress={reset} style={styles.enfasizedButton}><Text style={styles.enfasizedText}>Today</Text></TouchableOpacity>
-            </View>
-        </CustomModal>
+        <View style={[styles.row, !extras && { justifyContent: "center" }]}>
+            {
+                extras &&
+                <Button
+                    onPress={() => handleArrowPress(-1)}
+                >
+                    <Ionicons name="chevron-back" size={24} color="black" />
+                </Button>
+            }
+            <CustomModal
+                button={<Button onPress={() => { }}><Text style={styles.text}>{buttonText}</Text></Button>}
+            >
+                <View style={[styles.row, { justifyContent: "space-between" }]}>
+                    <TouchableOpacity onPress={() => handleChangeMonth(month - 1)} style={styles.button}>
+                        <Ionicons name="caret-back" size={24} color={colors.colors.primaryText} />
+                    </TouchableOpacity>
+                    <TouchableOpacity onPress={() => handleSetRender(RenderOptions.months, !monthsRendered)} style={styles.button}>
+                        <Text style={styles.text}>
+                            {t('months.' + String(dateH.getMonth(date)))}
+                        </Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity onPress={() => handleSetRender(RenderOptions.years, !yearsRendered)} style={styles.button}>
+                        <Text style={styles.text}>
+                            {" " + dateH.getYear(date) + " "}
+                        </Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity onPress={() => handleChangeMonth(month + 1)} style={styles.button}>
+                        <Ionicons name="caret-forward" size={24} color={colors.colors.primaryText} />
+                    </TouchableOpacity>
+                </View>
+                <ConditionalRendering />
+                <View style={styles.row}>
+                    <TouchableOpacity onPress={hideModal} style={styles.button}><Text style={styles.text}>
+                        {t("datePicker.cancel")}
+                    </Text></TouchableOpacity>
+                    <TouchableOpacity onPress={onTodayPress} style={styles.enfasizedButton}><Text style={styles.enfasizedText}>
+                        {t("datePicker.today")}
+                    </Text></TouchableOpacity>
+                </View>
+            </CustomModal>
+            {
+                extras &&
+                <Button
+                    onPress={() => handleArrowPress(1)}
+                >
+                    <Ionicons name="chevron-forward" size={24} color="black" />
+                </Button>
+            }
+
+        </View>
     )
 }
 
@@ -219,11 +289,15 @@ const styles2 = StyleSheet.create({
     dayCell: {
         minWidth: 40,
         minHeight: 40,
+        maxHeight: 40,
+        maxWidth: 40,
         elevation: 5,
         backgroundColor: 'white',
         alignItems: 'center',
         justifyContent: 'center',
         borderRadius: 5,
+        flexDirection: 'row',
+        overflow: 'hidden',
     },
     dayCellVoid: {
         minWidth: 40,

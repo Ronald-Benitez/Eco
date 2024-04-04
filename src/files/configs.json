@@ -14,8 +14,10 @@
         "inputText":"#333333",
         "inputPlaceholder":"#666666",
         "toastBackground":"#fff",
-        "toastText":"#000"
-
+        "toastText":"#000",
+        "delete":"#ff0000",
+        "edit":"#ffff00",
+        "disabled":"#e0e0e0"
     },
     "days":{
         "unassigned": "#e0e0e0",
@@ -29,11 +31,18 @@
         "relaxed": "#00ff7f",
         "stressed": "#ff0000"
     },
+    "financials":{
+        "income":"#00ff7f",
+        "expense":"#ff0000",
+        "goal":"#ff4081"
+    },
     "headers":{
         "home":"#ffa8da",
         "days":"#ffa8da",
         "giveaway":"#ffa8da",
         "settings":"#ffa8da",
-        "financials":"#ffa8da"
+        "financials":"#ffa8da",
+        "chart":"#ffa8da",
+        "expense-adder":"#ffa8da"
     }
 }

@@ -22,6 +22,17 @@ export default function Layout() {
                         backgroundColor: colors?.headers.days || '#fff'
                     }
                 }} />
+            <Tabs.Screen
+                name="chart"
+                options={{
+                    title: t('pages.chart'),
+                    tabBarIcon: ({ color, size }) => (
+                        <Ionicons name="bar-chart-outline" size={size} color={color} />
+                    ),
+                    headerStyle: {
+                        backgroundColor: colors?.headers.days || '#fff'
+                    }
+                }} />
         </StackBase>
     );
 }
