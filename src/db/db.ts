@@ -32,5 +32,25 @@ export async function openDatabase(db: SQLiteDatabase) {
           goal REAL
           );
         `);
+
+    await db.execAsync(`
+      CREATE TABLE IF NOT EXISTS registerList (
+        id INTEGER PRIMARY KEY NOT NULL, 
+        name TEXT, 
+        date TEXT, 
+        value REAL, 
+        type TEXT, 
+        group_id INTEGER)
+      `)
+
+    await db.execAsync(`
+      CREATE TABLE IF NOT EXISTS savingsList (
+        id INTEGER PRIMARY KEY NOT NULL, 
+        name TEXT, 
+        date TEXT, 
+        value REAL, 
+        type TEXT, 
+        group_id INTEGER)
+      `)
   });
 }

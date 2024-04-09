@@ -25,9 +25,7 @@ const ExpenseAdder = () => {
     }, [])
 
     const loadExpenses = async (i: number) => {
-        console.log(`expenses${index}`)
         const expenses = await Storage.getItem({ key: `expenses${i}` })
-        console.log(expenses)
         if (!expenses) {
             setExpenses([])
             return

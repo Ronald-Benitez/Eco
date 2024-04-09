@@ -3,6 +3,7 @@ import { Tabs } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import { useNavigation } from 'expo-router';
 import { DrawerActions } from '@react-navigation/native';
+import { View } from 'react-native';
 
 import useStyles from '@/src/hooks/useStyle';
 import Loading from '@/src/components/basics/loading';
@@ -23,12 +24,14 @@ const StackBase = ({ children }: StackBaseProps) => {
         <Tabs
             screenOptions={{
                 headerLeft: () => (
-                    <Ionicons
-                        name="menu-outline"
-                        size={24}
-                        color="black"
-                        onPress={() => navigation.dispatch(DrawerActions.openDrawer())}
-                    />
+                    <View style={{ paddingLeft: 20 }}>
+                        <Ionicons
+                            name="menu-outline"
+                            size={24}
+                            color="black"
+                            onPress={() => navigation.dispatch(DrawerActions.openDrawer())}
+                        />
+                    </View>
                 ),
                 tabBarStyle: {
                     backgroundColor: '#e0e0e0',

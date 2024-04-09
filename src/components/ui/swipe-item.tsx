@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
+import { View, Text, StyleSheet, TouchableOpacity, ViewStyle, TextStyle, StyleProp } from 'react-native'
 import React from 'react'
 import { Gesture, GestureDetector } from 'react-native-gesture-handler';
 import Animated, { useAnimatedStyle, useSharedValue, withSpring, runOnJS } from 'react-native-reanimated';
@@ -13,9 +13,11 @@ export interface SwipeItemProps {
     handleDelete: () => void;
     handleUpdate?: () => void;
     deleteContent?: React.ReactNode;
+    style?: StyleProp<ViewStyle>
+    top?: number
 }
 
-const SwipeItem = ({ children, handleDelete, handleUpdate, deleteContent }: SwipeItemProps) => {
+const SwipeItem = ({ children, handleDelete, handleUpdate, deleteContent, style, top }: SwipeItemProps) => {
     const { styles, colors } = useStyles();
     const translationX = useSharedValue(0)
     const deleteColor = colors?.colors?.delete || 'red'
@@ -24,7 +26,10 @@ const SwipeItem = ({ children, handleDelete, handleUpdate, deleteContent }: Swip
     const { t } = useTranslation()
 
     const pan = Gesture.Pan().onUpdate(e => {
-        translationX.value = e.translationX
+        const val = e.translationX
+        if (val > -150 && val < 150) {
+            translationX.value = val
+        }
     }).onEnd(e => {
         if (e.translationX < -90) {
             runOnJS(showModal)()
@@ -51,16 +56,16 @@ const SwipeItem = ({ children, handleDelete, handleUpdate, deleteContent }: Swip
     return (
         <View>
             <GestureDetector gesture={pan}>
-                <Animated.View style={[styles.horizontalBlock, animatedStyle]}>
+                <Animated.View style={[style ? style : styles.horizontalBlock, animatedStyle]}>
                     {children}
                 </Animated.View>
             </GestureDetector>
-            <Animated.View style={[styles.backgroundButton, styles.fixedBackground, animatedOpacity, { right: 0 }]}>
+            <Animated.View style={[styles.backgroundButton, styles.fixedBackground, animatedOpacity, { right: 0, top }]}>
                 <Feather name="trash" size={24} color={deleteColor} />
             </Animated.View>
             {
                 handleUpdate && (
-                    <Animated.View style={[styles.backgroundButton, styles.fixedBackground, animatedOpacity, { left: 0 }]}>
+                    <Animated.View style={[styles.backgroundButton, styles.fixedBackground, animatedOpacity, { left: 0, top }]}>
                         <Feather name="edit-2" size={24} color={editColor} />
                     </Animated.View>
                 )

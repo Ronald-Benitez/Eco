@@ -10,3 +10,17 @@ export interface BasicGroup {
 export interface Group extends BasicGroup {
   id: number;
 }
+
+export type ItemType = "expense" | "income"
+
+export interface BasicItem {
+  name: string;
+  date: string;
+  value: number;
+  type: ItemType
+  group_id: number
+}
+
+export interface Item extends BasicItem {
+  id: number
+}

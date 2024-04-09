@@ -1,25 +1,25 @@
 {
-    "colors":{
-        "primaryBackground":"#f5f5f5",
-        "primaryText":"#333333",
-        "secondaryBackground":"#eeeeee",
-        "secondaryText":"#666666",
-        "accentBackground":"#ffbfff",
-        "accentText":"#000",
-        "buttonBackground":"#ff4081",
-        "buttonText":"#ffffff",
-        "buttonBorder":"#ff4081",
-        "inputBorder":"#e0e0e0",
-        "inputBackground":"#ffffff",
-        "inputText":"#333333",
-        "inputPlaceholder":"#666666",
-        "toastBackground":"#fff",
-        "toastText":"#000",
-        "delete":"#ff0000",
-        "edit":"#ffff00",
-        "disabled":"#e0e0e0"
+    "colors": {
+        "primaryBackground": "#f5f5f5",
+        "primaryText": "#333333",
+        "secondaryBackground": "#eeeeee",
+        "secondaryText": "#666666",
+        "accentBackground": "#ffbfff",
+        "accentText": "#000",
+        "buttonBackground": "#ff4081",
+        "buttonText": "#ffffff",
+        "buttonBorder": "#ff4081",
+        "inputBorder": "#e0e0e0",
+        "inputBackground": "#ffffff",
+        "inputText": "#333333",
+        "inputPlaceholder": "#666666",
+        "toastBackground": "#fff",
+        "toastText": "#000",
+        "delete": "#ff0000",
+        "edit": "#c8ca00",
+        "disabled": "#e0e0e0"
     },
-    "days":{
+    "days": {
         "unassigned": "#e0e0e0",
         "neutral": "#ff4081",
         "happy": "#ffd700",
@@ -31,18 +31,19 @@
         "relaxed": "#00ff7f",
         "stressed": "#ff0000"
     },
-    "financials":{
-        "income":"#00ff7f",
-        "expense":"#ff0000",
-        "goal":"#ff4081"
+    "financials": {
+        "income": "#00ac2f",
+        "expense": "#ff6a46",
+        "goal": "#419bff"
     },
-    "headers":{
-        "home":"#ffa8da",
-        "days":"#ffa8da",
-        "giveaway":"#ffa8da",
-        "settings":"#ffa8da",
-        "financials":"#ffa8da",
-        "chart":"#ffa8da",
-        "expense-adder":"#ffa8da"
+    "headers": {
+        "home": "#ffa8da",
+        "days": "#ffa8da",
+        "giveaway": "#ffa8da",
+        "settings": "#ffa8da",
+        "chart": "#ffa8da",
+        "financials": "#ffa8da",
+        "expense-adder": "#ffa8da",
+        "savings": "#ffa8da"
     }
 }

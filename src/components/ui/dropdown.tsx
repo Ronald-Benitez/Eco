@@ -7,11 +7,13 @@ import useStyles from '@/src/hooks/useStyle';
 interface DropdownProps {
     children: React.ReactNode
     title?: string
+    col?: boolean
+    defaulActive?: boolean
 }
 
-const Dropdown: React.FC<DropdownProps> = ({ children, title }) => {
+const Dropdown: React.FC<DropdownProps> = ({ children, title, col, defaulActive }) => {
     const { styles } = useStyles()
-    const [active, setActive] = React.useState(false)
+    const [active, setActive] = React.useState(defaulActive)
 
     return (
         <View style={styles.dropdowmContainer}>
@@ -19,7 +21,7 @@ const Dropdown: React.FC<DropdownProps> = ({ children, title }) => {
                 {title && <Text style={active ? styles.title : styles.text}>{title}</Text>}
                 <Feather name={active ? "chevron-up" : "chevron-down"} size={30} color="black" />
             </Pressable>
-            {active && <View style={styles.row}>
+            {active && <View style={col ? styles.col : styles.row}>
                 {children}
             </View>}
         </View>

@@ -8,9 +8,10 @@
         "giveaway": "Sorteo",
         "settings": "Ajustes",
         "days": "Días",
-        "financials": "Finanzas",
         "chart": "Gráfico",
-        "expense-adder": "Sumador de gastos"
+        "financials": "Finanzas",
+        "expense-adder": "Sumador de gastos",
+        "savings": "Ahorros"
     },
     "giveaway": {
         "title": "Sorteo",
@@ -24,7 +25,7 @@
         "close": "Cerrar",
         "winners": "Ganadores"
     },
-    "days":{
+    "days": {
         "moods": "Estados de ánimo",
         "expected": "Esperado",
         "real": "Real"
@@ -34,27 +35,23 @@
     "confirmDelete": "¿Estás seguro de que quieres eliminar esto?",
     "delete": "Eliminar",
     "year-error": "Año no válido",
-
-    "pickers":{
+    "pickers": {
         "month": "Selecciona un mes"
     },
-
-    "colors":{
+    "colors": {
         "colors": "Colores",
         "days": "Días",
-        "headers":"Encabezados",
+        "headers": "Encabezados",
         "giveaway": "Sorteo",
         "settings": "Ajustes",
         "home": "Inicio",
         "financials": "Finanzas",
         "chart": "Gráfico",
         "expense-adder": "Sumador de gastos",
-
         "change": "Cambiar",
         "changeColorOf": "Cambiar color de",
-        "reset":"Restablecer",
+        "reset": "Restablecer",
         "resetMessage": "¿Estás seguro de que quieres restablecer los colores a sus valores por defecto?",
-
         "primaryBackground": "Fondo principal",
         "primaryText": "Texto principal",
         "secondaryBackground": "Fondo secundario",
@@ -72,7 +69,6 @@
         "toastText": "Texto del toast",
         "delete": "Eliminar",
         "edit": "Editar",
-
         "unassigned": "Sin asignar",
         "neutral": "Neutro",
         "happy": "Feliz",
@@ -84,12 +80,11 @@
         "excited": "Emocionado",
         "relaxed": "Relajado",
         "stressed": "Estresado",
-
         "income": "Ingresos",
         "expense": "Gastos",
         "goal": "Objetivo"
     },
-    "language":{
+    "language": {
         "en": "English",
         "es": "Español",
         "system": "Sistema",
@@ -97,7 +92,7 @@
         "language": "Idioma",
         "changeLanguage": "Cambiar idioma"
     },
-    "months":{
+    "months": {
         "0": "Enero",
         "1": "Febrero",
         "2": "Marzo",
@@ -111,7 +106,7 @@
         "10": "Noviembre",
         "11": "Diciembre"
     },
-    "daysShort":{
+    "daysShort": {
         "0": "Dom",
         "1": "Lun",
         "2": "Mar",
@@ -120,7 +115,7 @@
         "5": "Vie",
         "6": "Sáb"
     },
-    "daysLong":{
+    "daysLong": {
         "0": "Domingo",
         "1": "Lunes",
         "2": "Martes",
@@ -129,11 +124,11 @@
         "5": "Viernes",
         "6": "Sábado"
     },
-    "datePicker":{
+    "datePicker": {
         "today": "Hoy",
         "cancel": "Cancelar"
     },
-    "expense-adder":{
+    "expense-adder": {
         "edit": "Editar gasto",
         "add": "Añadir gasto",
         "name": "Nombre",
@@ -147,6 +142,7 @@
         "expenses": "Gastos",
         "incomes": "Ingresos",
         "goal": "Objetivo",
+        "balance": "Balance",
         "year": "Año",
         "month": "Mes",
         "cancel": "Cancelar",
@@ -154,6 +150,25 @@
         "add": "Crear grupo",
         "edit": "Editar grupo",
         "error": "Debes rellenar todos los campos",
-        "select-group": "Selecciona un grupo"
+        "select-group": "Selecciona un grupo",
+        "added": "Grupo agregado",
+        "edited": "Grupo editado",
+        "deleted": "Grupo eliminado"
+    },
+    "item": {
+        "name": "Nombre",
+        "value": "Valor",
+        "date": "Fecha",
+        "type": "Tipo",
+        "error": "Debes rellenar todos los campos",
+        "cancel": "Cancelar",
+        "save": "Guardar",
+        "add": "Crear item",
+        "edit": "Editar item",
+        "added": "Item creado",
+        "edited": "Item editado",
+        "deleted": "Item eliminado",
+        "income": "Ingreso",
+        "expense": "Gasto"
     }
 }

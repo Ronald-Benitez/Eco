@@ -1,5 +1,5 @@
 import { Tabs } from "expo-router";
-import { Ionicons } from '@expo/vector-icons';
+import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
 import { useTranslation } from "react-i18next";
 
 import StackBase from "@/src/components/navigation/stack-base";
@@ -28,6 +28,17 @@ export default function Layout() {
                     title: t('pages.expense-adder'),
                     tabBarIcon: ({ color, size }) => (
                         <Ionicons name="trending-down" size={size} color={color} />
+                    ),
+                    headerStyle: {
+                        backgroundColor: colors?.headers.financials || '#fff'
+                    }
+                }} />
+            <Tabs.Screen
+                name="savings"
+                options={{
+                    title: t('pages.savings'),
+                    tabBarIcon: ({ color, size }) => (
+                        <MaterialCommunityIcons name="piggy-bank-outline" size={size} color={color} />
                     ),
                     headerStyle: {
                         backgroundColor: colors?.headers.financials || '#fff'

@@ -8,9 +8,10 @@
         "giveaway": "Giveaway",
         "settings": "Settings",
         "days": "Days",
-        "financials": "Financials",
         "chart": "Chart",
-        "expense-adder": "Expense adder"
+        "financials": "Financials",
+        "expense-adder": "Expense adder",
+        "savings": "Savings"
     },
     "giveaway": {
         "title": "Giveaway",
@@ -34,7 +35,6 @@
     "confirmDelete": "Are you sure you want to delete this?",
     "delete": "Delete",
     "year-error": "Invalid year",
-
     "pickers": {
         "month": "Select month"
     },
@@ -141,7 +141,8 @@
         "name": "Name",
         "expenses": "Expenses",
         "incomes": "Incomes",
-        "goal": "Goals",
+        "goal": "Goal",
+        "balance": "Balance",
         "year": "Year",
         "month": "Month",
         "cancel": "Cancel",
@@ -149,6 +150,25 @@
         "add": "Create group",
         "edit": "Edit group",
         "error": "You must complete all fields",
-        "select-group": "Select group"
+        "select-group": "Select group",
+        "added": "Added group",
+        "edited": "Edited group",
+        "deleted": "Deleted group"
+    },
+    "item": {
+        "name": "Name",
+        "value": "Value",
+        "date": "Date",
+        "type": "Type",
+        "error": "You must complete all fields",
+        "cancel": "Cancel",
+        "save": "Save",
+        "add": "Add item",
+        "edit": "Edit item",
+        "added": "Added item",
+        "edited": "Edited item",
+        "deleted": "Deleted item",
+        "income": "Income",
+        "expense": "Expense"
     }
 }

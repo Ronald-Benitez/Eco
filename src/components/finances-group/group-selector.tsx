@@ -1,11 +1,9 @@
 import { View, Text, TouchableOpacity, ScrollView, TextInput, Modal, Pressable } from 'react-native'
 import React, { useState, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
-import * as SQlite from "expo-sqlite/next"
 
 import groupsHandler, { GroupTable } from '@/src/db/groups-handler'
 import { Group } from '@/src/interfaces/finances'
-import BaseModal from '../ui/base-modal'
 import useStyles from '@/src/hooks/useStyle'
 
 interface GroupSelectorProps {
@@ -42,10 +40,16 @@ const GroupSelector = ({ group, setGroup, table }: GroupSelectorProps) => {
         setModalVisible(false)
     }
 
+    const getPlaceHolder = (group: Group) => {
+        return group.name + " (" + t("months." + Number(group.month)) + " " + group.year + ")"
+    }
+
     return (
         <>
             <TouchableOpacity onPress={onBtnPress} style={styles.button}>
-                <Text style={styles.text}>{group ? group.name : t("group.select-group")}</Text>
+                <Text style={styles.text}>{group ?
+                    getPlaceHolder(group)
+                    : t("group.select-group")}</Text>
             </TouchableOpacity>
             <Modal
                 visible={modalVisible}
@@ -58,11 +62,15 @@ const GroupSelector = ({ group, setGroup, table }: GroupSelectorProps) => {
                         <>
                             <View style={styles.modalContent}>
                                 <Text style={styles.title}>{t("group.select-group")}</Text>
-                                <TextInput style={[styles.input, { textAlign: "center" }]} value={year} onChangeText={setYear} />
+                                <View style={[styles.row, { width: "100%", justifyContent: "center" }]}>
+                                    <TextInput style={[styles.input, { textAlign: "center" }]} value={year} onChangeText={setYear} />
+                                </View>
                                 <ScrollView style={[{ maxHeight: 400, minWidth: 300 }]}>
                                     {groups.map((group) => (
                                         <TouchableOpacity key={group.id} onPress={() => onSelect(group)} style={[styles.button, { marginTop: 10, elevation: 0 }]}>
-                                            <Text style={styles.text}>{group.name}</Text>
+                                            <Text style={styles.text}>
+                                                {getPlaceHolder(group)}
+                                            </Text>
                                         </TouchableOpacity>
                                     ))}
                                 </ScrollView>

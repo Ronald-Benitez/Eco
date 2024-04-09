@@ -18,18 +18,18 @@ const MonthSelector = ({ month, setMonth }: MonthSelectorProps) => {
     const baseColor = colors.colors.primaryText
 
     const months = [
-        { name: t('months.0'), value: '01' },
-        { name: t('months.1'), value: '02' },
-        { name: t('months.2'), value: '03' },
-        { name: t('months.3'), value: '04' },
-        { name: t('months.4'), value: '05' },
-        { name: t('months.5'), value: '06' },
-        { name: t('months.6'), value: '07' },
-        { name: t('months.7'), value: '08' },
-        { name: t('months.8'), value: '09' },
-        { name: t('months.9'), value: '10' },
-        { name: t('months.10'), value: '11' },
-        { name: t('months.11'), value: '12' }
+        { name: t('months.0'), value: '00' },
+        { name: t('months.1'), value: '01' },
+        { name: t('months.2'), value: '02' },
+        { name: t('months.3'), value: '03' },
+        { name: t('months.4'), value: '04' },
+        { name: t('months.5'), value: '05' },
+        { name: t('months.6'), value: '06' },
+        { name: t('months.7'), value: '07' },
+        { name: t('months.8'), value: '08' },
+        { name: t('months.9'), value: '09' },
+        { name: t('months.10'), value: '10' },
+        { name: t('months.11'), value: '11' }
     ]
 
     return (

@@ -3,6 +3,7 @@ import { StyleSheet, StyleProp, TextStyle, ViewStyle } from "react-native";
 import { type Theme } from "../interfaces/configs";
 import { readFile, writeFile } from "../helpers/FilesHelper";
 import data from "../files/configs.json";
+import { View } from "react-native-reanimated/lib/typescript/Animated";
 
 export interface StylesProps {
   smallText: StyleProp<TextStyle>;
@@ -12,6 +13,7 @@ export interface StylesProps {
   textColor: StyleProp<TextStyle>;
   enfasizedText: StyleProp<TextStyle>;
   textCenter: StyleProp<TextStyle>;
+  verticalText: StyleProp<TextStyle>;
 
   bgPrimary: StyleProp<ViewStyle>;
   container: StyleProp<ViewStyle>;
@@ -19,6 +21,7 @@ export interface StylesProps {
   wrapContainer: StyleProp<ViewStyle>;
   minGapContainer: StyleProp<ViewStyle>;
   dropdowmContainer: StyleProp<ViewStyle>;
+  borderedContainer: StyleProp<ViewStyle>
   toastContainer: StyleProp<ViewStyle>;
   toastContent: StyleProp<ViewStyle>;
   row: StyleProp<ViewStyle>;
@@ -119,6 +122,9 @@ export const getStyles = async () => {
     textCenter: {
       textAlign: "center",
     },
+    verticalText: {
+      transform: [{ rotate: "-90deg" }],
+    },
 
     bgPrimary: {
       backgroundColor: colors.colors.primaryBackground || "white",
@@ -150,6 +156,13 @@ export const getStyles = async () => {
       padding: 10,
       elevation: 5,
       backgroundColor: "#fff",
+      borderRadius: 5,
+      gap:10
+    },
+    borderedContainer: {
+      minWidth: "40%",
+      padding: 10,
+      borderWidth: 1,
       borderRadius: 5,
     },
     toastContainer: {
@@ -218,7 +231,7 @@ export const getStyles = async () => {
       justifyContent: "center",
       alignItems: "center",
       backgroundColor: colors.colors.primaryBackground || "white",
-      
+
     },
     disabledButton: {
       ...baseButton,
